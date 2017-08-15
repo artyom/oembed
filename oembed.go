@@ -33,6 +33,7 @@ const (
 // (http://oembed.com, section 2.3.4)
 type Metadata struct {
 	Type            Type   // resource type
+	Provider        string // provider name
 	Title           string // resource title
 	AuthorName      string // name of the author/owner
 	AuthorURL       string // URL for the author/owner of the resource
@@ -54,6 +55,7 @@ type decoder interface {
 func decode(dec decoder) (*Metadata, error) {
 	meta := struct {
 		XMLName         xml.Name `json:"-"  xml:"oembed"`
+		Provider        string   `json:"provider_name" xml:"provider_name"`
 		Type            string   `json:"type" xml:"type"`
 		Title           string   `json:"title" xml:"title"`
 		AuthorName      string   `json:"author_name" xml:"author_name"`
@@ -71,6 +73,7 @@ func decode(dec decoder) (*Metadata, error) {
 	}
 	m := &Metadata{
 		Type:       Type(strings.ToLower(meta.Type)),
+		Provider:   meta.Provider,
 		Title:      meta.Title,
 		AuthorName: meta.AuthorName,
 		AuthorURL:  meta.AuthorURL,

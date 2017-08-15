@@ -10,6 +10,7 @@ import (
 func reference() *Metadata {
 	return &Metadata{
 		Type:            TypeRich,
+		Provider:        "eduMedia",
 		Title:           "Soil formation",
 		AuthorName:      "eduMedia",
 		AuthorURL:       "http://www.edumedia-sciences.com/en/",
